@@ -1,0 +1,15 @@
+.divLogIn {
+  width: 300px;
+  height: 500px;
+  place-content: center;
+  place-self: center;
+}
+
+.divLogIn h2 {
+  font-size: 25px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.divLogIn button {
+  width: 100%;
+}

@@ -1,8 +1,9 @@
 .divLogIn {
   width: 300px;
   height: 500px;
-  place-content: center;
+  /* place-content: center; */
   place-self: center;
+  margin-top: 45%;
 }
 
 .divLogIn h2 {
@@ -12,4 +13,228 @@
 
 .divLogIn button {
   width: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.fullDivLogin {
+  display: flex;
+  justify-content: space-around;
+}
+
+.divImageLogo {
+  width: 50%;
+  background: linear-gradient(135deg, #1B3B46 0%, #1C2536 100%);
+  height: 100vh;
+}
+
+.widthlogin {
+  width: 50%;
+}
+
+.divImageLogo {
+  place-content: center;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.divImageLogo img {
+  width: 250px;
+  height: 100px;
+  margin-left: 30px;
+}
+
+.divImageLogo h2 {
+  margin-left: 30px;
+  position: relative;
+  top: 20px;
+}
+
+.navbar {
+  background-color: #1C2536;
+  height: 8vh;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 700px;
+}
+
+.navbarLogo img {
+  width: 120px;
+  height: 45px;
+}
+
+.navbarLogo {
+  display: flex;
+  place-items: center;
+  gap: 130px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.searchInputAntd .ant-input {
+  background-color: transparent !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.navbarNotification {
+  display: flex;
+  gap: 20px;
+  color: white;
+  place-items: center;
+}
+
+.saidbar {
+  background-color: #1C2536;
+  width: 23%;
+  height: 100vh;
+  margin-top: 8vh;
+
+}
+.saidbarOther h2{
+   position: relative;
+   right: 50px;
+}
+.saidbarOther {
+  display: flex;
+  gap: 70px;
+  place-content: center;
+  position: relative;
+  top: 30px;
+  width: 200px;
+  height: 40px;
+  color: white;
+  padding: 8px 0px 0px 0px;
+  margin-left: 20px;
+  border-radius: 4px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.saidbarHome {
+  display: flex;
+  gap: 20px;
+  place-content: center;
+  position: relative;
+  top: 30px;
+  width: 200px;
+  height: 40px;
+  color: white;
+  padding: 8px 0px 0px 0px;
+  margin-left: 20px;
+  border-radius: 4px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.saidbarOther:hover {
+  background-color: white;
+  cursor: pointer;
+  transition: 1000ms;
+  width: 200px;
+  place-content: center;
+  border-radius: 4px;
+  height: 40px;
+  color: rgb(62, 62, 99);
+  margin-left: 20px;
+  padding: 8px 0px 0px 0px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.saidbarHome:hover {
+  background-color: white;
+  transition: 1000ms;
+  cursor: pointer;
+  width: 200px;
+  place-content: center;
+  border-radius: 4px;
+  height: 40px;
+  color: rgb(62, 62, 99);
+  margin-left: 20px;
+  padding: 8px 0px 0px 0px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.barsOutlined {
+  position: relative;
+  top: -5px;
+  font-size: 20px;
+}
+
+.saidbarfixed{
+  position: fixed;
+  width: 100%;
+}
+
+
+
+.divBrands{
+  width: 77%;
+  position: absolute;
+  left: 23%;
+  top: 8vh;
+}
+
+.saidbarOther link{
+  text-decoration: none;
+  color: white;
+}
+
+.otherLink{
+  color: white;
+  text-decoration: none;
+  
+}
+.otherLink:hover{
+  color: rgb(62, 62, 99);
+  text-decoration: none;
+}
+
+.BrandsDivActions{
+  display: flex;
+  color: gray;
+  font-weight: 700;
+  width: 40%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  justify-content: space-between;
+  margin-left: 30px;
+  margin-top: 30px; 
+}
+
+.divLogIn{
+
+}
+
+.divCeteBraBann{
+  display: flex;
+  gap: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-left: 30px;
+}
+
+.getProducts{
+  width:33%;
+  top: 8vh;
+  margin-left: 20%;
+  box-shadow: 1px 3px 3px 3px rgba(128, 128, 128, 0.196);
+  padding: 20px;
+}
+
+.getProductsDiv{
+  display: flex;
+  justify-content: space-around;
+  gap: 50px;
+}
+
+.inaccessories{
+  place-content: center;
 }

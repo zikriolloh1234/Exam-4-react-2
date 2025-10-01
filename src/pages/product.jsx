@@ -26,7 +26,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContai
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
-const Dashboard = () => {
+const Products = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
 
@@ -41,20 +41,6 @@ const Dashboard = () => {
         setAge(event.target.value);
     };
 
-    const datachart = [
-        { name: 'Jan', data: 10 },
-        { name: 'Feb', data: 20 },
-        { name: 'Mar', data: 30 },
-        { name: 'Apr', data: 30 },
-        { name: 'May', data: 30 },
-        { name: 'Jun', data: 50 },
-        { name: 'Jul', data: 30 },
-        { name: 'Aug', data: 30 },
-        { name: 'Sep', data: 90 },
-        { name: 'Oct', data: 300 },
-        { name: 'Nov', data: 30 },
-        { name: 'Dec', data: 30 },
-    ];
 
 
 
@@ -91,10 +77,10 @@ const Dashboard = () => {
 
             <div className='saidbarfixed'>
                 <div className='saidbar'>
-                    <div className='saidbarHome SaidbarDashboard'>
+                    <div className='saidbarHome '>
                         <HomeOutlinedIcon />
                         <Link to="/dashboard" className='otherLink'>
-                            <h2 style={{ color: "rgb(62, 62, 99)" }}>Dashboard</h2>
+                            <h2>Dashboard</h2>
                         </Link>
                     </div>
                     <div className='saidbarHome'>
@@ -103,11 +89,9 @@ const Dashboard = () => {
                             <h2>Users</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
-                        <TagOutlined className='barsOutlined' />
-                        <Link className='otherLink' to="/products">
-                            <h2>Products</h2>
-                        </Link>
+                    <div className='saidbarHome SaidbarDashboard'>
+                        <TagOutlined className='barsOutlined ' />
+                        <h2>Products</h2>
                     </div>
                     <div className='saidbarOther'>
                         <FolderOutlined className='barsOutlined' />
@@ -118,49 +102,9 @@ const Dashboard = () => {
                 </div>
             </div>
 
-            <div className='lineCharts'>
-                <div style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-around"
-                }}>
-                    <div className='SalesMuiBox'>
-                        <img src={MuiBox2} alt="" />
-                        <div>
-                            <p>Sales</p>
-                            <span>$152k</span>
-                        </div>
-                    </div>
-                    <div className='SalesMuiBox'>
-                        <img src={MuiBoxIcon} alt="" />
-                        <div>
-                            <p>Sales</p>
-                            <span>$152k</span>
-                        </div>
-                    </div>
-                    <div className='SalesMuiBox'>
-                        <img src={MuiBox} alt="" />
-                        <div>
-                            <p>Sales</p>
-                            <span>$152k</span>
-                        </div>
-                    </div>
-
-                </div>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={datachart}>
-                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Line type="monotone" dataKey="data" stroke="#8884d8" />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-
 
             <div className='divBrands tilt-in-top-1'>
-                <h2 className='textDashboard'>Dashaboard</h2>
+                <h2 className='textDashboard'>Products</h2>
                 <div className='getProducts'>
                     <div className='seeAllProduct'>
                         <p>Top selling products</p>
@@ -196,4 +140,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Products

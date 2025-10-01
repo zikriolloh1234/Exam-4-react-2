@@ -55,17 +55,15 @@ const Login = () => {
     }
 
 
-
-
     return (
         <>
 
             {contextHolder}
 
-            <div className='fullDivLogin'>
+            <div className='fullDivLogin '>
                 <div className='divImageLogo '>
                     <h2 className='blink-1'>Welcome to admin panel</h2>
-                    <img className='bounce-top ' src={logoimage} alt="" />
+                    <img className='bounce-top' src={logoimage} alt="" />
                 </div>
                 <div className='widthlogin'>
                     <div className='divLogIn slide-top'>
@@ -81,7 +79,7 @@ const Login = () => {
                                 <inputAntd.Password iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} name='password' type='password' placeholder="Password" />
                             </FormControl><br />
                             <Link style={{ textDecoration: "none", marginBottom: "30px", marginLeft: "100px", color: "blue" }} className='signUpP' to="/Signup">Create Account</Link>
-                            <Button type='submit' size="md" variant={variant} color="primary">
+                            <Button className='' type='submit' size="md" variant={variant} color="primary">
                                 Log in
                             </Button>
                         </form>

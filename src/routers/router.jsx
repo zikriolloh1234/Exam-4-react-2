@@ -3,7 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from '../pages/login';
 import App from '../App';
 import Dashboard from '../pages/dashboard';
-import Other from '../pages/other';
+import Other from '../pages/others/other';
+import Categories from '../pages/others/categories';
+import Orders from '../pages/orders';
+import Products from '../pages/product';
 
 const Router = () => {
     return (
@@ -13,6 +16,9 @@ const Router = () => {
                     <Route path="/" element={<Login />}></Route>
                     <Route path="/dashboard" element={<Dashboard />}></Route>
                     <Route path="/other" element={<Other />}></Route>
+                    <Route path="/category" element={<Categories />}></Route>
+                    <Route path="/orders" element={<Orders />}></Route>
+                    <Route path="/products" element={<Products />}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

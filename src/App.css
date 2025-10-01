@@ -58,10 +58,11 @@
   height: 8vh;
   position: fixed;
   top: 0;
+  z-index: 10;
   width: 100%;
   display: flex;
   justify-content: space-around;
-  gap: 700px;
+  gap: 600px;
 }
 
 .navbarLogo img {
@@ -97,10 +98,12 @@
   margin-top: 8vh;
 
 }
-.saidbarOther h2{
-   position: relative;
-   right: 50px;
+
+.saidbarOther h2 {
+  position: relative;
+  right: 50px;
 }
+
 .saidbarOther {
   display: flex;
   gap: 70px;
@@ -147,6 +150,35 @@
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.SaidbarDashboard {
+  background-color: white;
+  cursor: pointer;
+  transition: 1000ms;
+  width: 200px;
+  place-content: center;
+  border-radius: 4px;
+  height: 40px;
+  color: rgb(62, 62, 99);
+  margin-left: 20px;
+  padding: 8px 0px 0px 0px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.activeLink {
+  background-color: white;
+  color: rgb(62, 62, 99);
+  cursor: pointer;
+  /* transition: 1000ms; */
+  width: 200px;
+  height: 40px;
+  text-decoration: none;
+  place-content: center;
+  border-radius: 4px;
+  /* margin-left: 20px; */
+  padding: 8px 0 0 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 
 .saidbarHome:hover {
   background-color: white;
@@ -168,36 +200,37 @@
   font-size: 20px;
 }
 
-.saidbarfixed{
+.saidbarfixed {
   position: fixed;
   width: 100%;
 }
 
 
 
-.divBrands{
+.divBrands {
   width: 77%;
   position: absolute;
   left: 23%;
   top: 8vh;
 }
 
-.saidbarOther link{
+.saidbarOther link {
   text-decoration: none;
   color: white;
 }
 
-.otherLink{
+.otherLink {
   color: white;
   text-decoration: none;
-  
+
 }
-.otherLink:hover{
+
+.otherLink:hover {
   color: rgb(62, 62, 99);
   text-decoration: none;
 }
 
-.BrandsDivActions{
+.BrandsDivActions {
   display: flex;
   color: gray;
   font-weight: 700;
@@ -205,14 +238,12 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   justify-content: space-between;
   margin-left: 30px;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
-.divLogIn{
+.divLogIn {}
 
-}
-
-.divCeteBraBann{
+.divCeteBraBann {
   display: flex;
   gap: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -221,20 +252,134 @@
   margin-left: 30px;
 }
 
-.getProducts{
-  width:33%;
-  top: 8vh;
-  margin-left: 20%;
+.getProducts {
+  width: 33%;
+  /* top: 15vh; */
+  margin-left: 61%;
   box-shadow: 1px 3px 3px 3px rgba(128, 128, 128, 0.196);
   padding: 20px;
 }
 
-.getProductsDiv{
+.getProductsDiv {
   display: flex;
   justify-content: space-around;
   gap: 50px;
+  background-color: rgba(255, 255, 255, 0.262);
+  margin-bottom: 20px;
 }
 
-.inaccessories{
+.inaccessories {
   place-content: center;
+}
+
+.seeAllProduct {
+  display: flex;
+  gap: 120px;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+.divBrandBrand {
+  width: 350px;
+  text-align: start;
+  gap: 300px;
+  margin-left: 40px;
+}
+
+.divDataBrands {
+  display: flex;
+  justify-content: space-between;
+}
+
+.divAddBrands {
+  width: 430px;
+  height: 200px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  position: relative;
+  left: 50%;
+  top: -300px;
+}
+
+.divAddBrands p {
+  margin-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divAddBrands input {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.divAddBrands button {
+  margin-top: 50px;
+  margin-left: 70%;
+}
+
+.BrandsToBrands {
+  width: 70px;
+  height: 25px;
+  background-color: rgba(135, 207, 235, 0.578);
+  border-radius: 5px;
+  text-align: center;
+  place-content: center;
+  cursor: pointer;
+}
+
+.categoryDiv {
+  position: absolute;
+  width: 50%;
+  left: 25%;
+  top: 10vh;
+}
+
+.tableUsers{
+  position: absolute;
+  top: 13vh;
+  width: 65%;
+  left: 24%
+}
+
+.lineCharts{
+  width:45%;
+  height: 70vh;
+  position: absolute;
+  top: 23vh;
+  left: 23%;
+}
+
+.SalesMuiBox{
+  width: 150px;
+  height: 10vh;
+  border-radius: 4px;
+  display: flex;
+  place-items: center;
+  gap: 15px;
+}
+
+.SalesMuiBox span{
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.textDashboard{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 30px;
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+.categoriyesLink{
+  padding: 3px;
+  background-color: rgba(135, 207, 235, 0.578);
+  border-radius: 4px;
+  color: black;
+  text-decoration: none;
+}
+
+.forColorBlack{
+  color: black;
+  text-decoration: none;
 }

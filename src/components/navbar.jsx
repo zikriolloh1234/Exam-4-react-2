@@ -21,6 +21,11 @@ const Navbar = () => {
     const handleChange = (event) => {
         setAge(event.target.value);
     };
+
+    function logout() {
+        localStorage.removeItem("accessToken");
+        window.location.reload();
+    }
     return (
         <>
             <div className='navbar'>
@@ -40,11 +45,9 @@ const Navbar = () => {
                             onChange={handleChange}
                         >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em onClick={logout}>Log Out</em>
                             </MenuItem>
-                            <MenuItem style={{ color: "white" }} value={10}>Ten</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={20}>Twenty</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={30}>Thirty</MenuItem>
+
                         </Select>
                     </FormControl>
 

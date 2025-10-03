@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from '../components/navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteProductAsync, getProduct } from '../features/api';
+import { getProduct } from '../features/api';
 import { baseApi } from '../app/token';
 import logoImage from '../assets/Group 1116606595 (3).png'
 
@@ -12,7 +12,7 @@ import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSha
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
 import { FolderOutlined, TagOutlined } from "@ant-design/icons";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -27,9 +27,10 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContai
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
-const Products = () => {
+const AddProducts = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
+    const navigate = useNavigate();
 
 
     const { data } = useSelector((state) => state.items);
@@ -45,10 +46,6 @@ const Products = () => {
     function logout() {
         localStorage.removeItem("accessToken");
         window.location.href = "/";
-    }
-
-    function deleteProduct(id) {
-        dispatch(deleteProductAsync(id));
     }
 
     return (
@@ -106,57 +103,14 @@ const Products = () => {
             </div>
             <div className='textProducts'>
                 <h2 className=''>Products</h2>
-                <Link to="/AddProducts">
-                    <ButtonAntd>+ Add New</ButtonAntd>
-                </Link>
+                <div style={{display:"flex", gap:"15px"}}>
+                <ButtonAntd onClick={() => navigate(-1)}>Cancel</ButtonAntd>
+                <ButtonAntd>Save</ButtonAntd>
+                </div>
             </div>
 
-            <div className='TableProducts'>
-                <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
-                    <thead>
-                        <tr>
-                            <th>Products</th>
-                            <th>Inventory</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data?.products?.map((item) => (
-                            <tr key={item.id}>
-                                <td>
-                                    <div style={{ display: "flex", gap: "10px", placeItems: "center" }}>
-                                        <img
-                                            src={`${baseApi}/images/${item.image}`}
-                                            width={"50px"}
-                                            height={"50px"}
-                                            style={{
-                                                borderRadius: "5px"
-                                            }}
-                                            alt="" />
-                                        <p>{item?.productName}</p>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <p>{item.categoryName}</p>
-                                </td>
-                                <td>
-                                    <p>{item.price}</p>
-                                </td>
-                                <td>
-                                    <button className='btnDeleteProduct'>🖋️</button>
-                                    <button className='btnDeleteProduct' onClick={() => deleteProduct(item.id)}>🗑️</button>
-                                </td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
-            </div>
         </>
     )
 }
 
-export default Products
+export default AddProducts

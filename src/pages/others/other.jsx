@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
-import { getBrands } from '../../features/api';
+import { addBrands, deleteBrands, EditBrandsApi, getBrands } from '../../features/api';
 import Navbar from '../../components/navbar';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import logoImage from '../../assets/Group 1116606595 (3).png'
 
 import { Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
+import { message, Space } from 'antd';
 
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -25,19 +26,89 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Other = () => {
     const dispatch = useDispatch();
     const { brands } = useSelector((state) => state.brands);
+    const [addNameBrand, setAddNameBrand] = useState();
+    const [editModalBrand, setEditModalBrand] = useState(false);
+    const [editNameBrands, setEditNameBrands] = useState();
+    const [editIdBrands, setEditIdBrands] = useState(null);
+    const [messageApi, contextHolder] = message.useMessage();
 
     const [age, setAge] = React.useState('');
 
     useEffect(() => {
-        dispatch(getBrands({ pageNumber: 1, pageSize: 10 }));
+        dispatch(getBrands({ pageNumber: 1, pageSize: 120 }));
     }, []);
+
+    const successEdit = () => {
+        messageApi.open({
+            type: 'warning',
+            content: 'Данные обновлены',
+        });
+    };
+
+    const successAdd = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Бренд успешно создан',
+        });
+    };
+
+    const key = 'updatable';
+   const successDelete = () => {
+        messageApi.open({
+            key,
+            type: 'loading',
+            content: 'Загрузка',
+        });
+        setTimeout(() => {
+            messageApi.open({
+                key,
+                type: 'error',
+                content: 'Бренд удалён',
+                duration: 2,
+            });
+        }, 1000);
+    };
+
+    
 
     const handleChange = (event) => {
         setAge(event.target.value);
     };
 
+    function logout() {
+        localStorage.removeItem("accessToken");
+        window.location.href = "/";
+    }
+
+
+    function addBrandDispatch(BrandName) {
+        dispatch(addBrands(BrandName));
+        setAddNameBrand("");
+        successAdd();
+    }
+    
+    function deleteBrand(BrandId) {
+        dispatch(deleteBrands(BrandId));
+        successDelete();
+    }
+
+    function EditBrands(brand) {
+        setEditModalBrand(true);
+        setEditNameBrands(brand.brandName);
+        setEditIdBrands(brand.id);
+    }
+
+    function editSaveBrands(e) {
+        e.preventDefault();
+        dispatch(EditBrandsApi({ brandId: editIdBrands, brandName: editNameBrands }));
+        setEditModalBrand(false);
+        successEdit();
+    }
+
+
     return (
         <>
+            {contextHolder}
 
             <div className='navbar'>
                 <div className='navbarLogo'>
@@ -56,11 +127,8 @@ const Other = () => {
                             onChange={handleChange}
                         >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em onClick={logout}>Log Out</em>
                             </MenuItem>
-                            <MenuItem style={{ color: "white" }} value={10}>Ten</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={20}>Twenty</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -103,10 +171,10 @@ const Other = () => {
                     <Link className='forColorBlack' to="/category">
                         <h2>categories</h2>
                     </Link>
-                    <Link className='categoriyesLink' to="/other">
+                    <Link className='categoriyesLinkBrands' to="/other">
                         <h2>Brands</h2>
                     </Link>
-                    <Link className='forColorBlack'>
+                    <Link className='forColorBlack' to="/subCategory">
                         <h2>subCategories</h2>
                     </Link>
                 </div>
@@ -120,27 +188,39 @@ const Other = () => {
                     {brands?.data?.map((brand) => {
                         return (
                             <div className='divDataBrands' key={brand.id}>
+
                                 <div>
-                                    <h2>{brand?.brandName}</h2>
+                                    <h2 className='
+                                    '>{brand?.brandName}</h2>
                                 </div>
 
                                 <div>
-                                    <button>🖋️</button>
-                                    <button>🗑️</button>
+                                    <button style={{ cursor: "pointer" }} onClick={() => EditBrands(brand)}>🖋️</button>
+                                    <button style={{ cursor: "pointer" }} onClick={() => deleteBrand(brand.id)}>🗑️</button>
                                 </div>
                             </div>
-
                         )
+
                     })}
 
                 </div>
 
-                <div className='divAddBrands'>
-                    <p>Add new Brand</p>
-                    <Input placeholder="Brand Name" />
-                    <Button variant="contained">Contained</Button>
-                </div>
+                {editModalBrand && (
+                    <div className='divEditModalBrands'>
+                        <p>Edit Brand</p>
+                        <form onSubmit={editSaveBrands} action="">
+                            <Input className='inputEditBrand' value={editNameBrands} onChange={(e) => setEditNameBrands(e.target.value)} placeholder="Brand Name" />
+                            <button className='btnCancelBrand' onClick={()=>setEditModalBrand(false)} style={{ cursor: "pointer" }} type='button' variant="contained">Cancel</button>
+                            <button className='btnCancelBrandSave' style={{ cursor: "pointer" }} type='onsubmit' variant="contained">Save</button>
+                        </form>
+                    </div>
+                )}
 
+                <div className='divAddBrands'>
+                    <p>Add new Brand </p>
+                    <Input value={addNameBrand} onChange={(e) => setAddNameBrand(e.target.value)} placeholder="Brand Name" />
+                    <Button onClick={() => addBrandDispatch(addNameBrand)} variant="contained">add brand</Button>
+                </div>
             </div>
 
 

@@ -12,14 +12,11 @@ import { Button as ButtonAntd, Input as inputAntd } from 'antd';
 import logoimage from '../assets/Group 1116606595 (3).png'
 import '../animista.css'
 
-
 const Login = () => {
     const navigate = useNavigate();
     const [variant, setVariant] = useState();
     const [messageApi, contextHolder] = message.useMessage();
     const [passwordVisible, setPasswordVisible] = React.useState(false);
-
-
 
     const errorLog = () => {
         messageApi.open({
@@ -35,6 +32,7 @@ const Login = () => {
         });
     };
 
+    
     async function loginUser(e) {
         e.preventDefault()
         const userName = e.target[0].value;
@@ -66,7 +64,7 @@ const Login = () => {
                     <img className='bounce-top' src={logoimage} alt="" />
                 </div>
                 <div className='widthlogin'>
-                    <div className='divLogIn slide-top'>
+                    <div className='divLogIn'>
                         <h2>Log in </h2><br />
                         {/* <p>Enter your details below</p> */}
                         <form onSubmit={loginUser}>

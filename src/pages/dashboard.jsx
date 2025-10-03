@@ -7,6 +7,7 @@ import logoImage from '../assets/Group 1116606595 (3).png'
 
 import { Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
+import dayjs from "dayjs";
 
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -40,21 +41,34 @@ const Dashboard = () => {
     const handleChange = (event) => {
         setAge(event.target.value);
     };
+    function logout() {
+        localStorage.removeItem("accessToken");
+        window.location.href = "/";
+    }
+    const monthlyStats = React.useMemo(() => {
+        // создаём объект с 12 месяцами
+        const months = {
+            Jan: 0, Feb: 0, Mar: 0, Apr: 0, May: 0, Jun: 0,
+            Jul: 0, Aug: 0, Sep: 0, Oct: 0, Nov: 0, Dec: 0
+        };
 
-    const datachart = [
-        { name: 'Jan', data: 10 },
-        { name: 'Feb', data: 20 },
-        { name: 'Mar', data: 30 },
-        { name: 'Apr', data: 30 },
-        { name: 'May', data: 30 },
-        { name: 'Jun', data: 50 },
-        { name: 'Jul', data: 30 },
-        { name: 'Aug', data: 30 },
-        { name: 'Sep', data: 90 },
-        { name: 'Oct', data: 300 },
-        { name: 'Nov', data: 30 },
-        { name: 'Dec', data: 30 },
-    ];
+        data?.products?.forEach(item => {
+            // если у товара есть дата
+            const month = dayjs(item.createdDate).format("MMM"); 
+            months[month] += item.quantity ?? 0;
+        });
+
+        return Object.keys(months).map(m => ({
+            name: m,
+            quantity: months[m]
+        }));
+    }, [data]);
+    const totalQuantity = data?.products?.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+    const datachart = data?.products?.map((item) => ({
+        name: item.productName,
+        quantity: item.quantity || 0
+    })) || [];
 
 
 
@@ -77,11 +91,8 @@ const Dashboard = () => {
                             onChange={handleChange}
                         >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em onClick={logout}>Log Out</em>
                             </MenuItem>
-                            <MenuItem style={{ color: "white" }} value={10}>Ten</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={20}>Twenty</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -128,32 +139,32 @@ const Dashboard = () => {
                         <img src={MuiBox2} alt="" />
                         <div>
                             <p>Sales</p>
-                            <span>$152k</span>
+                            <span>{totalQuantity}</span>
                         </div>
                     </div>
                     <div className='SalesMuiBox'>
                         <img src={MuiBoxIcon} alt="" />
                         <div>
                             <p>Sales</p>
-                            <span>$152k</span>
+                            <span>{totalQuantity}</span>
                         </div>
                     </div>
                     <div className='SalesMuiBox'>
                         <img src={MuiBox} alt="" />
                         <div>
                             <p>Sales</p>
-                            <span>$152k</span>
+                            <span>{totalQuantity}</span>
                         </div>
                     </div>
 
                 </div>
                 <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={datachart}>
+                    <LineChart data={monthlyStats}>
                         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Line type="monotone" dataKey="data" stroke="#8884d8" />
+                        <Line type="monotone" dataKey="quantity" stroke="#8884d8" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

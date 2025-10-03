@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCategory } from '../../features/api';
+import { addCategoryAsync, deleteCategoryAsync, editCategoryAsync, getCategory } from '../../features/api';
 import logoImage from '../../assets/Group 1116606595 (3).png'
 
-import { Button as ButtonAntd, Input } from 'antd';
+import { Button, Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
 
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
@@ -15,17 +15,28 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { baseApi } from '../../app/token';
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 const Categories = () => {
 
     const dispatch = useDispatch();
     const { category } = useSelector((state) => state.category);
-    const [age, setAge] = React.useState('');
+    const [login, setLogin] = React.useState('');
+    const [addCategoryModal, setAddCategoryModal] = useState();
+    const [categoryName, setCategoryName] = useState();
+    const [addImageCateg, setAddImageCateg] = useState();
+
+    const [editNameCtg, setEditNameCtg] = useState();
+    const [editId, setEditId] = useState(null);
+    const [editImageCtg, setEditImageCtg] = useState(null);
+    const [editModal, setEditModal] = useState(false);
+    const [editImageFile, setEditImageFile] = useState(null);
+
 
     console.log("data:", category);
     const handleChange = (event) => {
-        setAge(event.target.value);
+        setLogin(event.target.value);
     };
 
     useEffect(() => {
@@ -36,7 +47,45 @@ const Categories = () => {
         console.log("data:", category);
     }, [category]);
 
-    const navigate = useNavigate();
+    function logout() {
+        localStorage.removeItem("accessToken");
+        window.location.href = "/";
+    }
+
+    function addCategorySync() {
+        const formDataAdd = new FormData();
+        formDataAdd.append("categoryName", categoryName);
+        formDataAdd.append("categoryImage", addImageCateg[0]);
+
+        dispatch(addCategoryAsync(formDataAdd))
+        setAddCategoryModal(false);
+    }
+
+    function deleteCategory(id) {
+        dispatch(deleteCategoryAsync(id));
+    }
+
+    function editCategory(category) {
+        setEditId(category.id);
+        setEditImageCtg(category.categoryImage);
+        setEditNameCtg(category.categoryName);
+        setEditImageFile(null)
+        setEditModal(true);
+    }
+
+
+    function editSaveSync(e) {
+        e.preventDefault();
+
+        dispatch(editCategoryAsync({
+            id: editId,
+            categoryImage: editImageFile,
+            categoryName: editNameCtg,
+        }));
+
+        setEditModal(false);
+    }
+
 
     return (
         <>
@@ -52,16 +101,13 @@ const Categories = () => {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={age}
+                            value={login}
                             label="Age"
                             onChange={handleChange}
                         >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em onClick={logout}>Log Out</em>
                             </MenuItem>
-                            <MenuItem style={{ color: "white" }} value={10}>Ten</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={20}>Twenty</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
 
@@ -100,28 +146,101 @@ const Categories = () => {
 
             <div className='categoryDiv'>
                 <div className='divCeteBraBann'>
-                    <Link className='categoriyesLink' to="/category">
+                    <Link className='categoriyesLinkBrands' to="/category">
                         <h2>categories</h2>
                     </Link>
                     <Link className='forColorBlack' to="/other">
                         <h2>Brands</h2>
                     </Link>
-                    <Link className='forColorBlack'>
+                    <Link className='forColorBlack' to="/subCategory">
                         <h2>subCategories</h2>
                     </Link>
+                    <Button onClick={() => setAddCategoryModal(true)}>add Category</Button>
                 </div>
-                {category?.data?.map((category) => (
-                    <div key={category.id}>
-                        <h3>{category.categoryName}</h3>
 
-                        {category.subCategories?.map((sub) => (
-                            <div key={sub.id}>
-                                <p>{sub.subCategoryName}</p>
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                <div className='CategoryDivForUiFlex'>
+                    {category?.data?.map((category) => (
+                        <div className='categoryDivForUi' key={category.id}>
+                            <h3>{category.categoryName}</h3>
+                            <img
+                                src={`${baseApi}/images/${category.categoryImage}`}
+                                width={"50px"}
+                                height={"50px"}
+                                style={{
+                                    borderRadius: "5px"
+                                }}
+                                alt="" />
+                            <Button className='btnEditSaveCategory' onClick={() => deleteCategory(category.id)}>❌</Button>
+                            <Button className='btnEditSaveCategory' onClick={() => editCategory(category)}>🖋️</Button>
+                        </div>
+                    ))}
+                </div>
             </div>
+
+            {addCategoryModal && (
+                <div style={{ height: "220px" }} className='divEditModalBrands'>
+                    <p>Add Category</p>
+                    <Input className='inputEditBrand' value={categoryName} onChange={(e) => setCategoryName(e.target.value)} placeholder="Category Name" /> <br /><br />
+                    <Input className='inputEditBrand' type='file' onChange={(e) => setAddImageCateg(e.target.files)} />
+                    <button variant="contained" className='btnCancelBrand' onClick={() => setAddCategoryModal(false)}>Cancel</button>
+                    <button onClick={() => addCategorySync()} className='btnCancelBrandSave ' style={{ cursor: "pointer" }} variant="contained">Save</button>
+                </div>
+            )}
+
+
+            {editModal && (
+                <div style={{ height: "260px" }} className='divEditModalBrands'>
+                    <p>Edit Category</p>
+                    <form onSubmit={editSaveSync} action="">
+                        {/* Имя категории */}
+                        <Input
+                            className='inputEditBrand'
+                            value={editNameCtg}
+                            onChange={(e) => setEditNameCtg(e.target.value)}
+                            placeholder="Category Name"
+                        />
+                        <br /><br />
+
+                        {/* Покажем текущую картинку */}
+                        {editImageCtg && (
+                            <img
+                                src={`${baseApi}/images/${editImageCtg}`}
+                                alt="Preview"
+                                width="60"
+                                height="60"
+                                style={{ borderRadius: "5px", marginTop: "30px" }}
+                            />
+                        )}
+
+                        {/* Выбор новой картинки */}
+                        <input
+                            className='inputEditBrand'
+                            type='file'
+                            onChange={(e) => setEditImageFile(e.target.files)}
+                        />
+                        <div style={{display:"flex", gap:"20px",placeItems:""}}>
+                            <button
+                            style={{marginTop:"30px"}}
+                                className='btnCancelBrand'
+                                variant="contained"
+                                type='button'
+                                onClick={() => setEditModal(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type='submit'
+                                variant="contained"
+                                className='btnCancelBrandSave'
+                                style={{ cursor: "pointer", marginTop: "30px" }}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
 
 
 

@@ -10,7 +10,7 @@ import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSha
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
 import { FolderOutlined, TagOutlined } from "@ant-design/icons";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -24,6 +24,8 @@ import { baseApi } from '../app/token';
 const Orders = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
+    const token = localStorage.getItem("accessToken");
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -36,6 +38,11 @@ const Orders = () => {
     useEffect(() => {
         dispatch(getUsers({ pageNumber: 1, pageSize: 10 }));
     }, []);
+
+    function logout() {
+        localStorage.removeItem("accessToken");
+        window.location.href="/";
+    }
 
 
     return (
@@ -57,17 +64,13 @@ const Orders = () => {
                             onChange={handleChange}
                         >
                             <MenuItem value="">
-                                <em>None</em>
+                                <em onClick={logout}>Log Out</em>
                             </MenuItem>
-                            <MenuItem style={{ color: "white" }} value={10}>Ten</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={20}>Twenty</MenuItem>
-                            <MenuItem style={{ color: "white" }} value={30}>Thirty</MenuItem>
                         </Select>
                     </FormControl>
-
-
                 </div>
             </div>
+
 
             <div className='saidbarfixed'>
                 <div className='saidbar'>

@@ -659,3 +659,15 @@ widthlogin .categoriyesLink {
   cursor: pointer;
   height: 30px;
 }
+
+.textDecarotion{
+  position: relative;
+  color: white;
+  position: relative;
+  right: 55px;
+}
+
+.textDecorationProduct{
+  position: relative;
+  right: 18px;
+}

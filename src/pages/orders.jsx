@@ -74,22 +74,22 @@ const Orders = () => {
 
             <div className='saidbarfixed'>
                 <div className='saidbar'>
-                    <div className='saidbarHome'>
+                    <div className='saidbarHome' >
                         <HomeOutlinedIcon />
                         <Link to="/dashboard" className='otherLink'>
                             <h2 >Dashboard</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome SaidbarDashboard'>
-                        <BarsOutlined className='barsOutlined' />
-                        <Link to="/orders" style={{ textDecoration: "none" }}>
-                            <h2 style={{ color: "rgb(62, 62, 99)" }}>Users</h2>
+                    <div style={{gap:"75px"}} className='saidbarHome SaidbarDashboard'>
+                        <BarsOutlined className='barsOutlined ' />
+                        <Link to="/orders">
+                            <h2 style={{ color: "rgb(62, 62, 99)",textDecarotion:"none" }} className="textDecarotion">Users</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
+                    <div style={{gap:"39px"}} className='saidbarHome '>
                         <TagOutlined className='barsOutlined' />
                         <Link className='otherLink' to="/products">
-                            <h2>Products</h2>
+                            <h2 className="textDecorationProduct">Products</h2>
                         </Link>
                     </div>
                     <div className='saidbarOther'>

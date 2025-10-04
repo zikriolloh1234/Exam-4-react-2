@@ -108,16 +108,16 @@ const Dashboard = () => {
                             <h2 style={{ color: "rgb(62, 62, 99)" }}>Dashboard</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
+                    <div style={{gap:"75px"}} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
-                        <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
-                            <h2>Users</h2>
+                        <Link style={{ textDecoration: "none" }} to="/orders">
+                            <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
+                    <div style={{gap:"40px"}} className='saidbarHome'>
                         <TagOutlined className='barsOutlined' />
                         <Link className='otherLink' to="/products">
-                            <h2>Products</h2>
+                            <h2 className='textDecorationProduct'>Products</h2>
                         </Link>
                     </div>
                     <div className='saidbarOther'>

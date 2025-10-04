@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosToken, baseApi } from "../app/token";
+import { Input } from "antd";
 
 export const getProduct = createAsyncThunk("project/getProduct", async (pageNumber = 1, pageSize = 1000) => {
     try {
@@ -52,6 +53,51 @@ export const getBrands = createAsyncThunk("brands/getBrands",
 
             const { data } = await axiosToken.get(`${baseApi}/Brand/get-brands`, { params });
             return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
+
+export const getColor = createAsyncThunk(
+    "colors/getColor",
+    async ({ colorName = "", pageNumber = 1, pageSize = 10 }, thunkAPI) => {
+        try {
+            const { data } = await axiosToken.get(`${baseApi}/Color/get-colors`, {
+                params: {
+                    ColorName: colorName,   // строка поиска (если нужна)
+                    PageNumber: pageNumber, // номер страницы
+                    PageSize: pageSize      // количество записей на странице
+                }
+            });
+            return data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
+export const addProduct = createAsyncThunk(
+    "project/addProduct",
+    async (formData, thunkAPI) => {
+        try {
+            const response = await axiosToken.post(
+                `${baseApi}/Product/add-product`,
+                formData,
+            );
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+export const getSubCategory = createAsyncThunk(
+    "subCategoy/getSubCategory",
+    async ( thunkAPI) => {
+        try {
+            const response = await axiosToken.get(`${baseApi}/SubCategory/get-sub-category`);
+            return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data || error.message);
         }
@@ -114,7 +160,7 @@ export const addSubCategoryAync = createAsyncThunk("category/addSubCategory", as
     }
 }
 );
-export const deleteSubCategoryAync = createAsyncThunk("category/deleteSubCategoryAync", async(CategoryId, thunkAPI) => {
+export const deleteSubCategoryAync = createAsyncThunk("category/deleteSubCategoryAync", async (CategoryId, thunkAPI) => {
     try {
         console.log("id:", CategoryId);
         const response = await axiosToken.delete(`${baseApi}/SubCategory/delete-sub-category?id=${CategoryId}`);
@@ -126,7 +172,7 @@ export const deleteSubCategoryAync = createAsyncThunk("category/deleteSubCategor
 }
 );
 
-export const editSubCategoryAync = createAsyncThunk("category/editSubCategoryAync", async({id,CategoryId,SubCategoryName }, thunkAPI) => {
+export const editSubCategoryAync = createAsyncThunk("category/editSubCategoryAync", async ({ id, CategoryId, SubCategoryName }, thunkAPI) => {
     try {
         console.log("id:", CategoryId);
         const response = await axiosToken.delete(`${baseApi}/SubCategory/update-sub-category?Id=${id}&CategoryId=${CategoryId}&SubCategoryName=${SubCategoryName}`);
@@ -200,6 +246,14 @@ const initialState = {
     data: [],
     loading: false,
 }
+const initialSubCategory = {
+    subCategoryy: [],
+    loading: false,
+}
+const initialColors = {
+    colors: [],
+    loading: false,
+}
 
 const initialUser = {
     users: [],
@@ -214,6 +268,42 @@ const initialcategory = {
     loading: false,
 }
 
+// ?  get colors
+export const itemsSubCategoryes = createSlice({
+    name: "subCategoy",
+    initialState: initialSubCategory,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(getSubCategory.pending, (state) => { state.loading = true })
+            .addCase(getSubCategory.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.subCategoryy = payload;
+            })
+            .addCase(getSubCategory.rejected, (state, { payload }) => {
+                state.loading = false;
+                state.error = payload;
+            });
+    }
+})
+// ?  get colors
+export const itemsColors = createSlice({
+    name: "colors",
+    initialState: initialColors,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(getColor.pending, (state) => { state.loading = true })
+            .addCase(getColor.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.colors = payload;
+            })
+            .addCase(getColor.rejected, (state, { payload }) => {
+                state.loading = false;
+                state.error = payload;
+            });
+    }
+})
 // ?  get Category
 export const itemsCategory = createSlice({
     name: "category",
@@ -272,7 +362,7 @@ export const itemsBrands = createSlice({
     }
 })
 
-
+// ? get Product
 const itemsSlice = createSlice({
     name: "project",
     initialState,

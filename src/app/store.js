@@ -4,6 +4,8 @@ import itemSlice from '../features/api'
 import { itemsUsers } from '../features/api';
 import { itemsBrands } from '../features/api';
 import { itemsCategory } from '../features/api';
+import { itemsColors } from '../features/api';
+import { itemsSubCategoryes } from '../features/api';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +13,9 @@ export const store = configureStore({
     users: itemsUsers.reducer,
     brands: itemsBrands.reducer,
     category: itemsCategory.reducer,
+    colors: itemsColors.reducer,
+    subCategory: itemsSubCategoryes.reducer,
+
   },
 });
 

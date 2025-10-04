@@ -297,7 +297,7 @@
   border-radius: 4px;
   position: fixed;
   top: 27%;
-  left: 63%;  
+  left: 63%;
 }
 
 .divAddBrands p {
@@ -334,22 +334,22 @@
   top: 10vh;
 }
 
-.tableUsers{
+.tableUsers {
   position: absolute;
   top: 13vh;
   width: 65%;
   left: 24%
 }
 
-.lineCharts{
-  width:45%;
+.lineCharts {
+  width: 45%;
   height: 70vh;
   position: absolute;
   top: 23vh;
   left: 23%;
 }
 
-.SalesMuiBox{
+.SalesMuiBox {
   width: 150px;
   height: 10vh;
   border-radius: 4px;
@@ -358,19 +358,19 @@
   gap: 15px;
 }
 
-.SalesMuiBox span{
+.SalesMuiBox span {
   font-size: 30px;
   font-weight: 700;
 }
 
-.textDashboard{
+.textDashboard {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-left: 30px;
   margin-top: 20px;
   font-size: 30px;
 }
-widthlogin
-.categoriyesLink{
+
+widthlogin .categoriyesLink {
   padding: 3px;
   background-color: rgba(135, 207, 235, 0.578);
   border-radius: 4px;
@@ -378,60 +378,60 @@ widthlogin
   text-decoration: none;
 }
 
-.forColorBlack{
+.forColorBlack {
   color: black;
   text-decoration: none;
 }
 
-.divEditModalBrands{
+.divEditModalBrands {
   width: 300px;
-  height: 170px;  
+  height: 170px;
   background-color: white;
   border-radius: 5px;
   padding: 7px;
   box-shadow: 1px 3px 3px 3px rgba(128, 128, 128, 0.37);
   position: fixed;
   top: 25%;
-  left:40%;
+  left: 40%;
   z-index: 10;
   color: black;
 }
 
-.divBrandBrand button{
+.divBrandBrand button {
   background-color: transparent;
   border: none;
   font-size: 20px;
   padding: 5px;
 }
 
-.btnEditSaveBrand{
+.btnEditSaveBrand {
   position: relative;
   left: 70%;
   top: 70px;
 }
 
-.inputEditBrand{
+.inputEditBrand {
   position: relative;
   top: 40px;
 }
 
-.divEditModalBrands p{
+.divEditModalBrands p {
   font-size: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.categoriyesLinkBrands{
+.categoriyesLinkBrands {
   background-color: rgba(0, 139, 139, 0.268);
   text-decoration: none;
   padding: 2px;
   border-radius: 4px;
 }
 
-.getBrandName{
+.getBrandName {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.categoryDivForUi{
+.categoryDivForUi {
   width: 100px;
   height: 90px;
   padding: 5px;
@@ -442,7 +442,7 @@ widthlogin
   font-size: 12px;
 }
 
-.CategoryDivForUiFlex{
+.CategoryDivForUiFlex {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -451,17 +451,17 @@ widthlogin
   gap: 20px;
 }
 
-.btnEditSaveCategory{
+.btnEditSaveCategory {
   background-color: transparent;
   border: none;
   font-size: 15px;
   position: relative;
   z-index: 10;
   top: -80px;
-  left: 40px;  
+  left: 40px;
 }
 
-.btnEditCategorys{
+.btnEditCategorys {
   width: 75px;
   height: 35px;
   background-color: rgba(3, 21, 21, 0.163);
@@ -470,15 +470,15 @@ widthlogin
   border: none;
 }
 
-.TableProducts{
+.TableProducts {
   width: 70%;
   position: absolute;
   left: 24%;
   top: 25vh;
 }
 
-.textProducts{
-  width: 70%;
+.textProducts {
+  width: 65%;
   display: flex;
   justify-content: space-around;
   gap: 500px;
@@ -488,12 +488,12 @@ widthlogin
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.textProducts button{
-   width: 100px;
-   cursor: pointer;
+.textProducts button {
+  width: 100px;
+  cursor: pointer;
 }
 
-.btnDeleteProduct{
+.btnDeleteProduct {
   background-color: transparent;
   border: none;
   font-size: 18px;
@@ -501,49 +501,153 @@ widthlogin
 }
 
 
-.divSubForFlex{
+.divSubForFlex {
   width: 70%;
   display: flex;
 }
 
-.divSubCategory{
+.divSubCategory {
   width: 50%;
   position: absolute;
   left: 5%;
 }
 
-.btndeletesubcategory{
+.btndeletesubcategory {
   position: absolute;
   top: 73%;
   left: 50%;
 }
-.btndeletesubcategorySave{
+
+.btndeletesubcategorySave {
   position: absolute;
   top: 73%;
   left: 77%;
 }
 
-.btnCancelBrand{
+.btnCancelBrand {
   position: absolute;
   top: 70%;
   left: 45%;
   background-color: transparent;
-  padding:5px;
+  padding: 5px;
   border: 1px solid blueviolet;
   width: 80px;
   font-size: 16px;
   border-radius: 4px;
   cursor: pointer;
 }
-.btnCancelBrandSave{
+
+.btnCancelBrandSave {
   position: absolute;
   top: 70%;
-  left:72%;
+  left: 72%;
   cursor: pointer;
   background-color: transparent;
-  padding:5px;
+  padding: 5px;
   border: 1px solid blueviolet;
   width: 80px;
   font-size: 16px;
   border-radius: 4px;
+}
+
+.h2TextProductsAddNew {
+  display: flex;
+  place-self: center;
+  width: 500px;
+}
+
+.InputNameProducts {
+  width: 70%;
+  position: absolute;
+  left: 25%;
+  top: 20vh;
+}
+
+.sumInputnameProduct {
+  width: 50%;
+}
+
+.inputDescription {
+  padding: 5px 0px 20vh 5px;
+}
+
+.selectforCategory {
+  width: 100px;
+  height: 35px;
+  padding: 4px;
+  font-size: 20px;
+}
+
+.heigthPrice {
+  height: 25px;
+  padding: 4px;
+  font-size: 17px;
+  width: 80px;
+}
+
+.colorProductSky {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #A0BCE0;
+}
+
+.colorProductRed {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #E07575;
+}
+
+.colorProductBlue {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #6366F1;
+}
+
+.colorProductYellow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #FFB71A;
+}
+
+.colorProductGreen {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #06A561;
+}
+
+.colorProductBlck {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #41434D;
+}
+
+.divColorsForAddProducts {
+  width: 35%;
+  position: absolute;
+  left: 65%;
+  top: 20vh;
+}
+
+.divColorForProdcuts {
+  width: 250px;
+  height: 100px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px 3px rgba(128, 128, 128, 0.307);
+  padding: 10px;
+}
+
+.addImageToProduct {
+  width: 270px;
+  border: ridge black 1px;
+  margin-top: 30px;
+  background-color: white;
+  box-shadow: 2px 3px 3px 3px rgba(128, 128, 128, 0.307);
+
 }

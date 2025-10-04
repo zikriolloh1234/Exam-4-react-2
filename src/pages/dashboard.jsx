@@ -54,7 +54,7 @@ const Dashboard = () => {
 
         data?.products?.forEach(item => {
             // если у товара есть дата
-            const month = dayjs(item.createdDate).format("MMM"); 
+            const month = dayjs(item.createdDate).format("MMM");
             months[month] += item.quantity ?? 0;
         });
 
@@ -174,8 +174,10 @@ const Dashboard = () => {
                 <h2 className='textDashboard'>Dashaboard</h2>
                 <div className='getProducts'>
                     <div className='seeAllProduct'>
-                        <p>Top selling products</p>
-                        <p style={{ cursor: "pointer" }}>See All {" >"}</p>
+                        <p style={{width:"270px"}}>Top selling products</p>
+                        <Link style={{textDecoration:"none"}} to="/products">
+                            <p style={{ cursor: "pointer",textDecoration:"none", width:"80px" }}>See All {" >"}</p>
+                        </Link>
                     </div>
 
                     {data?.products?.map((item) => (

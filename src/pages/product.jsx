@@ -146,7 +146,9 @@ const Products = () => {
                                     <p>{item.price}</p>
                                 </td>
                                 <td>
-                                    <button className='btnDeleteProduct'>🖋️</button>
+                                    <Link to="/editProducts">
+                                        <button className='btnDeleteProduct'>🖋️</button>
+                                    </Link>
                                     <button className='btnDeleteProduct' onClick={() => deleteProduct(item.id)}>🗑️</button>
                                 </td>
 

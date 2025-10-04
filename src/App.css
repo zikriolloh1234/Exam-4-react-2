@@ -645,9 +645,17 @@ widthlogin .categoriyesLink {
 
 .addImageToProduct {
   width: 270px;
-  border: ridge black 1px;
+  border: dotted black 2px;
   margin-top: 30px;
   background-color: white;
   box-shadow: 2px 3px 3px 3px rgba(128, 128, 128, 0.307);
+  text-align: center;
+  height: 20vh;
+}
 
+.inputChoosFile{
+  width: 86px;
+  margin-top: 10px;
+  cursor: pointer;
+  height: 30px;
 }

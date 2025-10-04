@@ -9,6 +9,7 @@ import Orders from '../pages/orders';
 import Products from '../pages/product';
 import SubCategory from '../pages/subCategory';
 import AddProducts from '../pages/addProducts';
+import EditProducts from '../pages/editProduct';
 
 const Router = () => {
     return (
@@ -23,6 +24,7 @@ const Router = () => {
                     <Route path="/products" element={<Products />}></Route>
                     <Route path="/subCategory" element={<SubCategory/>}></Route>
                     <Route path="/AddProducts" element={<AddProducts/>}></Route>
+                    <Route path="/editProducts" element={<EditProducts/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

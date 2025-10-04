@@ -32,7 +32,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContai
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
-const AddProducts = () => {
+const EditProducts = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
     const navigate = useNavigate();
@@ -213,7 +213,7 @@ const AddProducts = () => {
                 /> <br /><br />
                 <input
                     type="text"
-                    style={{height:"33px",fontSize:"16px",width:"100px", padding:"3px"}}
+                    style={{ height: "33px", fontSize: "16px", width: "100px", padding: "3px" }}
                     placeholder="Code"
                     value={productData.Code}
                     onChange={(e) => setProductData({ ...productData, Code: e.target.value })}
@@ -328,4 +328,4 @@ const AddProducts = () => {
     )
 }
 
-export default AddProducts
+export default EditProducts

@@ -29,6 +29,7 @@ import MuiBox2 from '../assets/div.MuiBox-root (4).png'
 import MuiBoxIcon from '../assets/iconly-glass-discount.svg fill.png'
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
+import { message, Space } from 'antd';
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
@@ -38,6 +39,14 @@ const AddProducts = () => {
     const navigate = useNavigate();
     const [subCategories, setSubCategories] = useState([]);
     const [selectedSubCategory, setSelectedSubCategory] = useState("");
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const successAdd = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Продуст успешно создан',
+        });
+    };
 
     const [productData, setProductData] = React.useState({
         ProductName: "",
@@ -51,9 +60,6 @@ const AddProducts = () => {
         Code: "",
     });
     const [images, setImages] = React.useState(null);
-
-
-
 
     const { data } = useSelector((state) => state.items);
     const { colors } = useSelector((state) => state.colors)
@@ -129,6 +135,7 @@ const AddProducts = () => {
 
         dispatch(addProduct(formData))
         navigate("/products")
+        successAdd();
 
     };
     const [idSubCategory, setIdSubCategory] = useState(null);
@@ -142,6 +149,7 @@ const AddProducts = () => {
 
     return (
         <>
+            {contextHolder}
             <div className='navbar'>
                 <div className='navbarLogo'>
                     <img src={logoImage} alt="" />
@@ -175,15 +183,15 @@ const AddProducts = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
-                            <h2>Users</h2>
+                            <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome SaidbarDashboard'>
+                    <div style={{ gap: "39px" }} className='saidbarHome SaidbarDashboard'>
                         <TagOutlined className='barsOutlined ' />
-                        <h2>Products</h2>
+                        <h2 className='textDecorationProduct'>Products</h2>
                     </div>
                     <div className='saidbarOther'>
                         <FolderOutlined className='barsOutlined' />
@@ -213,7 +221,7 @@ const AddProducts = () => {
                 /> <br /><br />
                 <input
                     type="text"
-                    style={{height:"33px",fontSize:"16px",width:"100px", padding:"3px"}}
+                    style={{ height: "33px", fontSize: "16px", width: "100px", padding: "3px" }}
                     placeholder="Code"
                     value={productData.Code}
                     onChange={(e) => setProductData({ ...productData, Code: e.target.value })}

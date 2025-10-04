@@ -24,12 +24,14 @@ import MuiBox2 from '../assets/div.MuiBox-root (4).png'
 import MuiBoxIcon from '../assets/iconly-glass-discount.svg fill.png'
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
+import { message, Space } from 'antd';
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Products = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
+
 
 
     const { data } = useSelector((state) => state.items);
@@ -46,13 +48,34 @@ const Products = () => {
         localStorage.removeItem("accessToken");
         window.location.href = "/";
     }
+    const [messageApi, contextHolder] = message.useMessage();
+
+
+    const successDelete = () => {
+        messageApi.open({
+            key,
+            type: 'loading',
+            content: 'Загрузка',
+        });
+        setTimeout(() => {
+            messageApi.open({
+                key,
+                type: 'error',
+                content: 'продуст удалён',
+                duration: 2,
+            });
+        }, 1000);
+    };
 
     function deleteProduct(id) {
         dispatch(deleteProductAsync(id));
+        successDelete();
     }
 
     return (
         <>
+            {contextHolder}
+
             <div className='navbar'>
                 <div className='navbarLogo'>
                     <img src={logoImage} alt="" />
@@ -86,13 +109,13 @@ const Products = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"75px"}} className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
                             <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"39px"}}  className='saidbarHome SaidbarDashboard'>
+                    <div style={{ gap: "39px" }} className='saidbarHome SaidbarDashboard'>
                         <TagOutlined className='barsOutlined ' />
                         <h2 className='textDecorationProduct'>Products</h2>
                     </div>

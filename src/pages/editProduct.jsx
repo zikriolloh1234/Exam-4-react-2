@@ -175,15 +175,15 @@ const EditProducts = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
-                            <h2>Users</h2>
+                            <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div className='saidbarHome SaidbarDashboard'>
+                    <div style={{ gap: "39px" }} className='saidbarHome SaidbarDashboard'>
                         <TagOutlined className='barsOutlined ' />
-                        <h2>Products</h2>
+                        <h2 className='textDecorationProduct'>Products</h2>
                     </div>
                     <div className='saidbarOther'>
                         <FolderOutlined className='barsOutlined' />

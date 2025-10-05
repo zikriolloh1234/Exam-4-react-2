@@ -240,8 +240,6 @@
   margin-top: 30px;
 }
 
-.divLogIn {}
-
 .divCeteBraBann {
   display: flex;
   gap: 20px;
@@ -653,21 +651,57 @@ widthlogin .categoriyesLink {
   height: 20vh;
 }
 
-.inputChoosFile{
+.inputChoosFile {
   width: 86px;
   margin-top: 10px;
   cursor: pointer;
   height: 30px;
 }
 
-.textDecarotion{
+.textDecarotion {
   position: relative;
   color: white;
   position: relative;
   right: 55px;
 }
 
-.textDecorationProduct{
+.textDecorationProduct {
   position: relative;
   right: 18px;
+}
+
+.InputSearchProduct {
+  width: 250px;
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  left: 25%;
+  top: 20vh;
+}
+
+.inputSearchCategory {
+  width: 250px;
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  left: 95%;
+  top: 5vh;
+}
+
+.InputSearchBrands {
+  width: 250px;
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  left: 75%;
+  top: 13vh;
+}
+
+.InputSearchSubCategory {
+  width: 250px;
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  left: 93%;
+  top: 5vh;
 }

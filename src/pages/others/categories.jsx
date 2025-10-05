@@ -33,6 +33,14 @@ const Categories = () => {
     const [editModal, setEditModal] = useState(false);
     const [editImageFile, setEditImageFile] = useState(null);
 
+    const [searchTerm, setSearchTerm] = React.useState("");
+
+
+    const products = category?.data || [];
+    const SearchData = products?.filter((item) =>
+        item?.categoryName?.toLowerCase().includes(searchTerm?.toLowerCase())
+    );
+
 
     console.log("data:", category);
     const handleChange = (event) => {
@@ -123,13 +131,13 @@ const Categories = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"75px"}} className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
                             <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"40px"}} className='saidbarHome'>
+                    <div style={{ gap: "40px" }} className='saidbarHome'>
                         <TagOutlined className='barsOutlined' />
                         <Link className='otherLink' to="/products">
                             <h2 className='textDecorationProduct'>Products</h2>
@@ -155,11 +163,16 @@ const Categories = () => {
                     <Link className='forColorBlack' to="/subCategory">
                         <h2>subCategories</h2>
                     </Link>
+                    <div className='inputSearchCategory'>
+                        <Input onChange={(e) => setSearchTerm(e.target.value)}
+                            placeholder='Search Product'></Input>
+                    </div>
                     <Button onClick={() => setAddCategoryModal(true)}>add Category</Button>
                 </div>
 
+
                 <div className='CategoryDivForUiFlex'>
-                    {category?.data?.map((category) => (
+                    {SearchData?.map((category) => (
                         <div className='categoryDivForUi' key={category.id}>
                             <h3>{category.categoryName}</h3>
                             <img
@@ -218,9 +231,9 @@ const Categories = () => {
                             type='file'
                             onChange={(e) => setEditImageFile(e.target.files)}
                         />
-                        <div style={{display:"flex", gap:"20px",placeItems:""}}>
+                        <div style={{ display: "flex", gap: "20px", placeItems: "" }}>
                             <button
-                            style={{marginTop:"30px"}}
+                                style={{ marginTop: "30px" }}
                                 className='btnCancelBrand'
                                 variant="contained"
                                 type='button'

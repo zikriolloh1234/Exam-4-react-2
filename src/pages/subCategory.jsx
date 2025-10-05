@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addSubCategoryAync, deleteSubCategoryAync, editSubCategoryAync, getCategory } from '../features/api';
+import { addSubCategoryAync, deleteSubCategoryAync, editSubCategoryAync, getCategory, getSubCategory } from '../features/api';
 import logoImage from '../assets/Group 1116606595 (3).png'
 
 import { Button, Button as ButtonAntd, Input } from 'antd';
@@ -23,6 +23,7 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 const SubCategory = () => {
 
     const dispatch = useDispatch();
+    const { subCategoryy } = useSelector((state) => state.subCategory);
     const { category } = useSelector((state) => state.category);
     const [age, setAge] = React.useState('');
     const [addModalCategory, setAddModalCategory] = useState(false);
@@ -31,6 +32,21 @@ const SubCategory = () => {
     const [modalEditSubCategory, setModalEditSubCategory] = useState(false);
     const [editNameSubCategory, setEditNameSubCategory] = useState();
     const [editSubId, setEditSubId] = useState(null);
+    const [searchTerm, setSearchTerm] = React.useState("");
+
+    const products = subCategoryy?.data || []; 
+    console.log("subCategoryData:", products);
+
+    const SearchData = products?.filter((item) =>
+        item?.subCategoryName?.toLowerCase().includes(searchTerm?.toLowerCase())
+    );
+
+    console.log("Redux subCategory:", subCategoryy?.data);
+
+    useEffect(() => {
+        dispatch(getSubCategory());
+    }, []);
+
 
     function editSbuCategSync(sub) {
         setEditNameSubCategory(sub.subCategoryName);
@@ -43,7 +59,7 @@ const SubCategory = () => {
         setAddModalCategory(true);
     }
 
-    console.log("data:", category);
+    // console.log("data:", category);
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -53,9 +69,9 @@ const SubCategory = () => {
         dispatch(getCategory());
     }, []);
 
-    useEffect(() => {
-        console.log("data:", category);
-    }, [category]);
+    // useEffect(() => {
+    //     console.log("data:", subCategory);
+    // }, [subCategory]);
 
     function logout() {
         localStorage.removeItem("accessToken");
@@ -79,8 +95,8 @@ const SubCategory = () => {
     function deleteSubCateg(id) {
         dispatch(deleteSubCategoryAync(id))
     }
-    
-    function editSubCategoryVizov(){
+
+    function editSubCategoryVizov() {
         // dispatch(editSubCategoryAync({Id:idSubCategory, CategoryId:}))
     }
 
@@ -121,13 +137,13 @@ const SubCategory = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"75px"}} className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
                             <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"40px"}} className='saidbarHome'>
+                    <div style={{ gap: "40px" }} className='saidbarHome'>
                         <TagOutlined className='barsOutlined' />
                         <Link className='otherLink' to="/products">
                             <h2 className='textDecorationProduct'>Products</h2>
@@ -156,6 +172,10 @@ const SubCategory = () => {
 
                     <Button onClick={() => addSubCategorySyncModal()}>+ add New</Button>
                 </div>
+                <div className='InputSearchSubCategory'>
+                    <Input onChange={(e) => setSearchTerm(e.target.value)}
+                        placeholder='Search Product'></Input>
+                </div>
                 <div className='divSubCategory'>
 
                     <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
@@ -166,19 +186,18 @@ const SubCategory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {category?.data?.map((row) =>
-                                row?.subCategories?.map(sub => (
-                                    <tr key={sub.id}>
-                                        <td>
-                                            <p>{sub?.subCategoryName}</p>
-                                        </td>
-                                        <td>
-                                            <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'>🖋️</button>
-                                            <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'>🗑️</button>
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
+                            {SearchData?.map(sub => (
+                                <tr key={sub.id}>
+                                    <td>
+                                        <p>{sub?.subCategoryName}</p>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'>🖋️</button>
+                                        <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'>🗑️</button>
+                                    </td>
+                                </tr>
+                            ))
+                            }
                         </tbody>
                     </Table>
 

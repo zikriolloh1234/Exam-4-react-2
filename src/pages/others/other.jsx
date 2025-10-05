@@ -33,6 +33,12 @@ const Other = () => {
     const [messageApi, contextHolder] = message.useMessage();
 
     const [age, setAge] = React.useState('');
+    const [searchTerm, setSearchTerm] = React.useState("");
+    const products = brands?.data || [];
+
+    const SearchData = products?.filter((item) =>
+        item?.brandName?.toLowerCase().includes(searchTerm?.toLowerCase())
+    );
 
     useEffect(() => {
         dispatch(getBrands({ pageNumber: 1, pageSize: 120 }));
@@ -53,7 +59,7 @@ const Other = () => {
     };
 
     const key = 'updatable';
-   const successDelete = () => {
+    const successDelete = () => {
         messageApi.open({
             key,
             type: 'loading',
@@ -69,7 +75,7 @@ const Other = () => {
         }, 1000);
     };
 
-    
+
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -86,7 +92,7 @@ const Other = () => {
         setAddNameBrand("");
         successAdd();
     }
-    
+
     function deleteBrand(BrandId) {
         dispatch(deleteBrands(BrandId));
         successDelete();
@@ -144,13 +150,13 @@ const Other = () => {
                             <h2>Dashboard</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"75px"}} className='saidbarHome'>
+                    <div style={{ gap: "75px" }} className='saidbarHome'>
                         <BarsOutlined className='barsOutlined' />
                         <Link style={{ textDecoration: "none", color: "white" }} to="/orders">
                             <h2 className='textDecarotion'>Users</h2>
                         </Link>
                     </div>
-                    <div style={{gap:"39px"}} className='saidbarHome'>
+                    <div style={{ gap: "39px" }} className='saidbarHome'>
                         <TagOutlined className='barsOutlined' />
                         <Link className='otherLink' to="/products">
                             <h2 className='textDecorationProduct'>Products</h2>
@@ -163,6 +169,11 @@ const Other = () => {
                         </Link>
                     </div>
                 </div>
+            </div>
+
+            <div className='InputSearchBrands'>
+                <Input onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder='Search Product'></Input>
             </div>
 
             <div className='divBrands'>
@@ -179,13 +190,14 @@ const Other = () => {
                     </Link>
                 </div>
 
+
                 <div className='BrandsDivActions'>
                     <p>Brands</p>
                     <p>Actions</p>
                 </div>
                 <hr style={{ width: "45%", marginLeft: "20px", backgroundColor: "gray", marginBottom: "10px" }} />
                 <div className='divBrandBrand'>
-                    {brands?.data?.map((brand) => {
+                    {SearchData?.map((brand) => {
                         return (
                             <div className='divDataBrands' key={brand.id}>
 
@@ -210,7 +222,7 @@ const Other = () => {
                         <p>Edit Brand</p>
                         <form onSubmit={editSaveBrands} action="">
                             <Input className='inputEditBrand' value={editNameBrands} onChange={(e) => setEditNameBrands(e.target.value)} placeholder="Brand Name" />
-                            <button className='btnCancelBrand' onClick={()=>setEditModalBrand(false)} style={{ cursor: "pointer" }} type='button' variant="contained">Cancel</button>
+                            <button className='btnCancelBrand' onClick={() => setEditModalBrand(false)} style={{ cursor: "pointer" }} type='button' variant="contained">Cancel</button>
                             <button className='btnCancelBrandSave' style={{ cursor: "pointer" }} type='onsubmit' variant="contained">Save</button>
                         </form>
                     </div>

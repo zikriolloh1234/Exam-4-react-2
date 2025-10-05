@@ -32,13 +32,22 @@ const Products = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
 
+    const [searchTerm, setSearchTerm] = React.useState("");
 
-
+   
     const { data } = useSelector((state) => state.items);
+    // console.log("data,Items:",useSelector((state) => state.items));
 
+    const products = data?.products || [];
+
+    // фильтруем по названию
+    const SearchData = products?.filter((item) =>
+        item?.productName?.toLowerCase().includes(searchTerm?.toLowerCase())
+    );
     useEffect(() => {
         dispatch(getProduct({ pageNumber: 1, pageSize: 10 }));
     }, []);
+
 
     const handleChange = (event) => {
         setAge(event.target.value);
@@ -71,6 +80,8 @@ const Products = () => {
         dispatch(deleteProductAsync(id));
         successDelete();
     }
+
+
 
     return (
         <>
@@ -134,6 +145,11 @@ const Products = () => {
                 </Link>
             </div>
 
+            <div className='InputSearchProduct'>
+                <Input onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder='Search Product'></Input>
+            </div>
+
             <div className='TableProducts'>
                 <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
                     <thead>
@@ -146,7 +162,7 @@ const Products = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data?.products?.map((item) => (
+                        {SearchData?.map((item) => (
                             <tr key={item.id}>
                                 <td>
                                     <div style={{ display: "flex", gap: "10px", placeItems: "center" }}>

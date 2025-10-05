@@ -15,7 +15,6 @@ export const store = configureStore({
     category: itemsCategory.reducer,
     colors: itemsColors.reducer,
     subCategory: itemsSubCategoryes.reducer,
-
   },
 });
 

@@ -761,3 +761,16 @@ widthlogin .categoriyesLink {
   text-decoration: none;
   color: #0f2f6a;
 }
+
+.TableOtherTable{
+  width: 78%;
+  margin-left: 2%;
+  border:1px solid rgba(128, 128, 128, 0.353);
+  margin-top: 10px;
+}
+.TableSubCategoryTable{
+  width: 135%;
+  margin-left: 2%;
+  border:1px solid rgba(128, 128, 128, 0.353);
+  margin-top: 1px;
+}

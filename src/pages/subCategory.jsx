@@ -162,23 +162,41 @@ const SubCategory = () => {
             </div>
 
             <div className='categoryDiv'>
-                <div className='divCeteBraBann'>
-                    <Link className='forColorBlack' to="/category">
-                        <h2>Category</h2>
-                    </Link>
-                    <Link className='forColorBlack' to="/other">
-                        <h2>Brands</h2>
-                    </Link>
-                    <Link className=' categoriyesLinkBrands'>
-                        <h2>SubCategory</h2>
-                    </Link>
+               
 
-                    <Button onClick={() => addSubCategorySyncModal()}>+ add New</Button>
+                <div className='TableSubCategoryTable'>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <Link className='LinkCategory' to="/category">
+                                        <h2 >Category</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/other">
+                                        <h2 >Brands</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/subCategory">
+                                        <h2 style={{ backgroundColor: "skyblue", width: "130px", padding: "3px" }}>SubCategory</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Button onClick={() => addSubCategorySyncModal()}>+ add New</Button>
+                                </th>
+                                <th>
+                                    <div className=''>
+                                        <Input onChange={(e) => setSearchTerm(e.target.value)}
+                                            placeholder='Search Product'></Input>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </Table>
                 </div>
-                <div className='InputSearchSubCategory'>
-                    <Input onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder='Search Product'></Input>
-                </div>
+
                 <div className='divSubCategory'>
 
                     <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
@@ -195,8 +213,8 @@ const SubCategory = () => {
                                         <p>{sub?.subCategoryName}</p>
                                     </td>
                                     <td>
-                                        <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'><BorderColorIcon sx={{color:"blue"}} /></button>
-                                        <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'><DeleteIcon sx={{color:"red"}}/></button>
+                                        <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'><BorderColorIcon sx={{ color: "blue" }} /></button>
+                                        <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'><DeleteIcon sx={{ color: "red" }} /></button>
                                     </td>
                                 </tr>
                             ))

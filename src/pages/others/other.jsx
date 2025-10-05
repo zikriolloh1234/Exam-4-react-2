@@ -175,18 +175,18 @@ const Other = () => {
                 </div>
             </div>
 
-            <div className='InputSearchBrands'>
+            {/* <div className='InputSearchBrands'>
                 <Input onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder='Search Product'></Input>
-            </div>
+            </div> */}
 
-            
+
 
             <div className='divBrands'>
 
-                
 
-                <div className='divCeteBraBann '>
+
+                {/* <div className='divCeteBraBann '>
                     <Link className='forColorBlack' to="/category">
                         <h2>Category</h2>
                     </Link>
@@ -196,6 +196,36 @@ const Other = () => {
                     <Link className='forColorBlack' to="/subCategory">
                         <h2>SubCategory</h2>
                     </Link>
+                </div> */}
+
+                <div className='TableOtherTable'>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <Link className='LinkCategory' to="/category">
+                                        <h2 >Category</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/other">
+                                        <h2 style={{ backgroundColor: "skyblue", width: "80px", padding: "3px" }}>Brands</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/subCategory">
+                                        <h2>SubCategory</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <div className=''>
+                                        <Input onChange={(e) => setSearchTerm(e.target.value)}
+                                            placeholder='Search Product'></Input>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                    </Table>
                 </div>
 
                 <div className='tableOthers'>

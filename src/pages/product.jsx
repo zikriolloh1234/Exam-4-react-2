@@ -5,10 +5,14 @@ import { deleteProductAsync, getProduct } from '../features/api';
 import { baseApi } from '../app/token';
 import logoImage from '../assets/Group 1116606595 (3).png'
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+
 import { Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
 
-import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
 import { FolderOutlined, TagOutlined } from "@ant-design/icons";
@@ -34,7 +38,7 @@ const Products = () => {
 
     const [searchTerm, setSearchTerm] = React.useState("");
 
-   
+
     const { data } = useSelector((state) => state.items);
     // console.log("data,Items:",useSelector((state) => state.items));
 
@@ -151,7 +155,7 @@ const Products = () => {
             </div>
 
             <div className='TableProducts'>
-                <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
+                <Table hoverRow sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
                     <thead>
                         <tr>
                             <th>Products</th>
@@ -186,9 +190,9 @@ const Products = () => {
                                 </td>
                                 <td>
                                     <Link to="/editProducts">
-                                        <button className='btnDeleteProduct'>🖋️</button>
+                                        <button className='btnDeleteProduct'> <BorderColorIcon sx={{ color: "blue" }} /> </button>
                                     </Link>
-                                    <button className='btnDeleteProduct' onClick={() => deleteProduct(item.id)}>🗑️</button>
+                                    <button className='btnDeleteProduct' onClick={() => deleteProduct(item.id)}><DeleteIcon sx={{ color: "red" }} /></button>
                                 </td>
 
                             </tr>

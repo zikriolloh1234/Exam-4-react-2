@@ -6,6 +6,9 @@ import logoImage from '../assets/Group 1116606595 (3).png'
 import { Button, Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
 
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
@@ -34,7 +37,7 @@ const SubCategory = () => {
     const [editSubId, setEditSubId] = useState(null);
     const [searchTerm, setSearchTerm] = React.useState("");
 
-    const products = subCategoryy?.data || []; 
+    const products = subCategoryy?.data || [];
     console.log("subCategoryData:", products);
 
     const SearchData = products?.filter((item) =>
@@ -161,13 +164,13 @@ const SubCategory = () => {
             <div className='categoryDiv'>
                 <div className='divCeteBraBann'>
                     <Link className='forColorBlack' to="/category">
-                        <h2>categories</h2>
+                        <h2>Category</h2>
                     </Link>
                     <Link className='forColorBlack' to="/other">
                         <h2>Brands</h2>
                     </Link>
                     <Link className=' categoriyesLinkBrands'>
-                        <h2>subCategories</h2>
+                        <h2>SubCategory</h2>
                     </Link>
 
                     <Button onClick={() => addSubCategorySyncModal()}>+ add New</Button>
@@ -192,8 +195,8 @@ const SubCategory = () => {
                                         <p>{sub?.subCategoryName}</p>
                                     </td>
                                     <td>
-                                        <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'>🖋️</button>
-                                        <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'>🗑️</button>
+                                        <button onClick={() => editSbuCategSync(sub)} className='btnDeleteProduct'><BorderColorIcon sx={{color:"blue"}} /></button>
+                                        <button onClick={() => deleteSubCateg(sub.id)} className='btnDeleteProduct'><DeleteIcon sx={{color:"red"}}/></button>
                                     </td>
                                 </tr>
                             ))

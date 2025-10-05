@@ -705,3 +705,59 @@ widthlogin .categoriyesLink {
   left: 93%;
   top: 5vh;
 }
+
+.categoryForImageAndName {
+  display: flex;
+  place-items: center;
+
+}
+
+.TableCategory {
+  width: 135%;
+  z-index: 1002;
+  margin-top: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.195);
+}
+
+/* .Table {
+  position: relative;
+  overflow: visible !important;
+  z-index: 1;
+}
+
+.Table {
+  overflow: visible !important;
+} */
+
+.IconDelete {
+  background-color: transparent;
+  border: none;
+}
+
+.divSubCategory {
+  border: 1px solid rgba(128, 128, 128, 0.377);
+  margin-top: 30px;
+  width: 300px;
+}
+
+.tableOthers{
+  width: 400px;
+  border: 1px solid rgba(128, 128, 128, 0.437);
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.TableProducts{
+  border: 1px solid rgba(128, 128, 128, 0.421);
+  margin-top: 20px;
+}
+
+.TableCategoryTable{
+  width: 135%;
+  border: 1px solid rgba(128, 128, 128, 0.31);
+}
+
+.LinkCategory{
+  text-decoration: none;
+  color: #0f2f6a;
+}

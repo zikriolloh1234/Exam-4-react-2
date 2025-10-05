@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addCategoryAsync, deleteCategoryAsync, editCategoryAsync, getCategory } from '../../features/api';
 import logoImage from '../../assets/Group 1116606595 (3).png'
-
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/joy/Table';
 import { Button, Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
-
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+
+
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
 import { FolderOutlined, TagOutlined } from "@ant-design/icons";
@@ -153,25 +156,82 @@ const Categories = () => {
             </div>
 
             <div className='categoryDiv'>
-                <div className='divCeteBraBann'>
-                    <Link className='categoriyesLinkBrands' to="/category">
-                        <h2>categories</h2>
-                    </Link>
-                    <Link className='forColorBlack' to="/other">
-                        <h2>Brands</h2>
-                    </Link>
-                    <Link className='forColorBlack' to="/subCategory">
-                        <h2>subCategories</h2>
-                    </Link>
-                    <div className='inputSearchCategory'>
-                        <Input onChange={(e) => setSearchTerm(e.target.value)}
-                            placeholder='Search Product'></Input>
-                    </div>
-                    <Button onClick={() => setAddCategoryModal(true)}>add Category</Button>
+
+                <div className='TableCategoryTable'>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <Link className='LinkCategory'  to="/category">
+                                        <h2 style={{backgroundColor:"skyblue", width:"100px", padding:"3px"}}>Category</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/other">
+                                        <h2>Brands</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <Link className='LinkCategory' to="/subCategory">
+                                        <h2>SubCategory</h2>
+                                    </Link>
+                                </th>
+                                <th>
+                                    <div className=''>
+                                        <Input onChange={(e) => setSearchTerm(e.target.value)}
+                                            placeholder='Search Product'></Input>
+                                    </div>
+                                </th>
+                                <th>
+                                    <Button onClick={() => setAddCategoryModal(true)}>+ Add New</Button>
+                                </th>
+                            </tr>
+                        </thead>
+                    </Table>
                 </div>
 
 
-                <div className='CategoryDivForUiFlex'>
+               
+
+                <div className='TableCategory'>
+                    <Table hoverRow>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {SearchData?.map((category) => (
+                                <tr key={category.id}>
+                                    <td>
+                                        {category.categoryImage ? (
+                                            <img
+                                                src={`${baseApi}/images/${category.categoryImage}`}
+                                                width="50px"
+                                                height="50px"
+                                                style={{ borderRadius: "5px" }}
+                                                alt="" />
+                                        ) : (
+                                            "_"
+                                        )}
+                                    </td>
+                                    <td>
+                                        <p>{category.categoryName}</p>
+
+                                    </td>
+                                    <td>
+                                        <Button className='IconDelete' onClick={() => deleteCategory(category.id)}><DeleteIcon sx={{ color: "red" }} /></Button>
+                                        <Button className='IconDelete' onClick={() => editCategory(category)}><BorderColorIcon sx={{ color: "blue" }} /></Button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+
+                {/* <div className='CategoryDivForUiFlex'>
                     {SearchData?.map((category) => (
                         <div className='categoryDivForUi' key={category.id}>
                             <h3>{category.categoryName}</h3>
@@ -183,11 +243,10 @@ const Categories = () => {
                                     borderRadius: "5px"
                                 }}
                                 alt="" />
-                            <Button className='btnEditSaveCategory' onClick={() => deleteCategory(category.id)}>❌</Button>
-                            <Button className='btnEditSaveCategory' onClick={() => editCategory(category)}>🖋️</Button>
+
                         </div>
                     ))}
-                </div>
+                </div> */}
             </div>
 
             {addCategoryModal && (
@@ -205,7 +264,7 @@ const Categories = () => {
                 <div style={{ height: "260px" }} className='divEditModalBrands'>
                     <p>Edit Category</p>
                     <form onSubmit={editSaveSync} action="">
-                        {/* Имя категории */}
+
                         <Input
                             className='inputEditBrand'
                             value={editNameCtg}
@@ -214,7 +273,7 @@ const Categories = () => {
                         />
                         <br /><br />
 
-                        {/* Покажем текущую картинку */}
+
                         {editImageCtg && (
                             <img
                                 src={`${baseApi}/images/${editImageCtg}`}
@@ -225,7 +284,7 @@ const Categories = () => {
                             />
                         )}
 
-                        {/* Выбор новой картинки */}
+
                         <input
                             className='inputEditBrand'
                             type='file'

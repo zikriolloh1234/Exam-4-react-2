@@ -6,7 +6,10 @@ import logoImage from '../assets/Group 1116606595 (3).png'
 import { Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
 
+import DeleteIcon from '@mui/icons-material/Delete'
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+
+
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import { BarsOutlined } from "@ant-design/icons";
 import { FolderOutlined, TagOutlined } from "@ant-design/icons";
@@ -54,14 +57,10 @@ const Orders = () => {
                 </div>
                 <div className='navbarNotification'>
                     <NotificationsNoneSharpIcon style={{ color: "white" }} />
-                    <FormControl sx={{ m: 1, minWidth: 120 }} style={{ color: "white" }} size="small">
-                        <InputLabel id="demo-select-small-label">Age</InputLabel>
+                    <FormControl sx={{ m: 1, minWidth: 120,color:"white" }} size="small">
+                        <InputLabel id="demo-select-small-label">Log Out</InputLabel>
                         <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={age}
-                            label="Age"
-                            onChange={handleChange}
+                           
                         >
                             <MenuItem value="">
                                 <em onClick={logout}>Log Out</em>

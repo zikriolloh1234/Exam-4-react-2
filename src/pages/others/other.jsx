@@ -23,6 +23,10 @@ import Select from '@mui/material/Select';
 const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Table from '@mui/joy/Table';
+
 const Other = () => {
     const dispatch = useDispatch();
     const { brands } = useSelector((state) => state.brands);
@@ -176,45 +180,46 @@ const Other = () => {
                     placeholder='Search Product'></Input>
             </div>
 
+            
+
             <div className='divBrands'>
 
-                <div className='divCeteBraBann'>
+                
+
+                <div className='divCeteBraBann '>
                     <Link className='forColorBlack' to="/category">
-                        <h2>categories</h2>
+                        <h2>Category</h2>
                     </Link>
                     <Link className='categoriyesLinkBrands' to="/other">
                         <h2>Brands</h2>
                     </Link>
                     <Link className='forColorBlack' to="/subCategory">
-                        <h2>subCategories</h2>
+                        <h2>SubCategory</h2>
                     </Link>
                 </div>
 
-
-                <div className='BrandsDivActions'>
-                    <p>Brands</p>
-                    <p>Actions</p>
-                </div>
-                <hr style={{ width: "45%", marginLeft: "20px", backgroundColor: "gray", marginBottom: "10px" }} />
-                <div className='divBrandBrand'>
-                    {SearchData?.map((brand) => {
-                        return (
-                            <div className='divDataBrands' key={brand.id}>
-
-                                <div>
-                                    <h2 className='
-                                    '>{brand?.brandName}</h2>
-                                </div>
-
-                                <div>
-                                    <button style={{ cursor: "pointer" }} onClick={() => EditBrands(brand)}>🖋️</button>
-                                    <button style={{ cursor: "pointer" }} onClick={() => deleteBrand(brand.id)}>🗑️</button>
-                                </div>
-                            </div>
-                        )
-
-                    })}
-
+                <div className='tableOthers'>
+                    <Table hoverRow>
+                        <thead>
+                            <tr>
+                                <th>Brands</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {SearchData?.map((brand) => (
+                                <tr key={brand.id}>
+                                    <td>
+                                        <p>{brand?.brandName}</p>
+                                    </td>
+                                    <td>
+                                        <button className='IconDelete' style={{ cursor: "pointer" }} onClick={() => EditBrands(brand)}><BorderColorIcon sx={{ color: "blue" }} /></button>
+                                        <button className='IconDelete' style={{ cursor: "pointer" }} onClick={() => deleteBrand(brand.id)}><DeleteIcon sx={{ color: "red" }} /></button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
                 </div>
 
                 {editModalBrand && (

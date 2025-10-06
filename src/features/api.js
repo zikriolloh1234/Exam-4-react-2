@@ -86,6 +86,7 @@ export const addProduct = createAsyncThunk(
                 `${baseApi}/Product/add-product`,
                 formData,
             );
+            thunkAPI.dispatch((getProduct({ pageNumber: 1, pageSize: 1000 })));
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -94,7 +95,7 @@ export const addProduct = createAsyncThunk(
 );
 export const getSubCategory = createAsyncThunk(
     "subCategoy/getSubCategory",
-    async ( thunkAPI) => {
+    async (thunkAPI) => {
         try {
             const response = await axiosToken.get(`${baseApi}/SubCategory/get-sub-category`);
             return response.data
@@ -239,9 +240,44 @@ export const deleteProductAsync = createAsyncThunk("project/deleteProductAsync",
 }
 );
 
+export const deleteImageProductAsync = createAsyncThunk("project/deleteProductAsync", async (id, thunkAPI) => {
+    try {
+        console.log("id:", id);
+        const { products } = await axiosToken.delete(`${baseApi}/Product/delete-image-from-product?imageId=${id}`);
+        thunkAPI.dispatch((getProduct({ pageNumber: 1, pageSize: 1000 })));
+        return products;
+    } catch (error) {
+        console.log(error);
+    }
+}
+);
+export const addmageProductAsync = createAsyncThunk("project/addmageProductAsync", async ( thunkAPI) => {
+    try {
+        const { products } = await axiosToken.post(`${baseApi}/Product/add-image-to-product`);
+        thunkAPI.dispatch((getProduct({ pageNumber: 1, pageSize: 1000 })));
+        return products;
+    } catch (error) {
+        console.log(error);
+    }
+}
+);
 
 
+export const getByIdProductAsync = createAsyncThunk("byId/getByIdProductAsync", async (id, thunkAPI) => {
+    try {
+        console.log("id:", id);
+        const  products  = await axiosToken.get(`${baseApi}/Product/get-product-by-id?id=${id}`);
+        return products.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+);
 
+const initialStateGetById = {
+    byId: [],
+    loading: false,
+}
 const initialState = {
     data: [],
     loading: false,
@@ -267,6 +303,25 @@ const initialcategory = {
     category: [],
     loading: false,
 }
+
+// ?  get By id
+export const itemsGetById = createSlice({
+    name: "byId",
+    initialState: initialStateGetById,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(getByIdProductAsync.pending, (state) => { state.loading = true })
+            .addCase(getByIdProductAsync.fulfilled, (state, { payload }) => {
+                state.loading = false;
+                state.byId = payload;
+            })
+            .addCase(getByIdProductAsync.rejected, (state, { payload }) => {
+                state.loading = false;
+                state.error = payload;
+            });
+    }
+})
 
 // ?  get colors
 export const itemsSubCategoryes = createSlice({

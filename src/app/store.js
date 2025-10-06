@@ -6,6 +6,7 @@ import { itemsBrands } from '../features/api';
 import { itemsCategory } from '../features/api';
 import { itemsColors } from '../features/api';
 import { itemsSubCategoryes } from '../features/api';
+import { itemsGetById } from '../features/api';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     category: itemsCategory.reducer,
     colors: itemsColors.reducer,
     subCategory: itemsSubCategoryes.reducer,
+    byIdProduct: itemsGetById.reducer,
   },
 });
 

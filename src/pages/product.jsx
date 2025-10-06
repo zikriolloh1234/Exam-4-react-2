@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteProductAsync, getProduct } from '../features/api';
+import { deleteImageProductAsync, deleteProductAsync, getByIdProductAsync, getProduct } from '../features/api';
 import { baseApi } from '../app/token';
 import logoImage from '../assets/Group 1116606595 (3).png'
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+import InfoIcon from '@mui/icons-material/Info';
 
 import { Button as ButtonAntd, Input } from 'antd';
 const { Search } = Input;
@@ -35,12 +36,39 @@ const onSearch = (value, _e, info) => console.log(info?.source, value);
 const Products = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
+    const [byIdModal, setByIdModal] = useState(false);
 
     const [searchTerm, setSearchTerm] = React.useState("");
 
+    const [productId, setProductId] = useState();
+    const [brandId, setbrandId] = useState();
+    const [colorId, setColorId] = useState();
+    const [productName, setProductName] = useState();
+    const [description, setDescription] = useState();
+    const [quantity, setQuantity] = useState();
+    const [codeColor, setCodeColor] = useState();
+    const [price, setPrice] = useState();
+    const [hasDisCount, setHasDisCount] = useState();
+    const [subCategoryId, setSubCategoryId] = useState();
+
+
+    function editProducts(item) {
+        setProductId(item.id);
+        setProductName(item.productName);
+        setPrice(item.price);
+        setQuantity(item.quantity);
+        setHasDisCount(item.HasDiscount);
+    }
+
 
     const { data } = useSelector((state) => state.items);
-    // console.log("data,Items:",useSelector((state) => state.items));
+
+    const { byId } = useSelector((state) => state.byIdProduct);
+
+    function getById(id) {
+        dispatch(getByIdProductAsync(id));
+        setByIdModal(true)
+    }
 
     const products = data?.products || [];
 
@@ -51,6 +79,15 @@ const Products = () => {
     useEffect(() => {
         dispatch(getProduct({ pageNumber: 1, pageSize: 10 }));
     }, []);
+
+    function deleteProductIMage(id) {
+        dispatch(deleteImageProductAsync(id));
+        setByIdModal(false)
+    }
+
+    function addImageProduct(){
+        dispatch(addImageProduct());
+    }
 
 
     const handleChange = (event) => {
@@ -74,7 +111,7 @@ const Products = () => {
             messageApi.open({
                 key,
                 type: 'error',
-                content: 'продуст удалён',
+                content: 'продукт удалён',
                 duration: 2,
             });
         }, 1000);
@@ -189,10 +226,25 @@ const Products = () => {
                                     <p>{item.price}</p>
                                 </td>
                                 <td>
-                                    <Link to="/editProducts">
-                                        <button className='btnDeleteProduct'> <BorderColorIcon sx={{ color: "blue" }} /> </button>
+                                    <Link
+                                        state={{
+                                            id: item.id,
+                                            ProductName: item.productName,
+                                            Description: item.description,
+                                            BrandId: item.brandId,
+                                            CategoryId: item.categoryId,
+                                            SubCategoryId: item.subCategoryId,
+                                            Price: item.price,
+                                            DiscountPrice: item.discountPrice,
+                                            Quantity: item.quantity,
+                                            ColorId: item.colorId,
+                                            Code: item.code,
+                                        }}
+                                        to="/editProducts">
+                                        <button onClick={() => editProducts(item)} className='btnDeleteProduct'> <BorderColorIcon sx={{ color: "blue" }} /> </button>
                                     </Link>
                                     <button className='btnDeleteProduct' onClick={() => deleteProduct(item.id)}><DeleteIcon sx={{ color: "red" }} /></button>
+                                    <button className='btnDeleteProduct' onClick={() => getById(item.id)}><InfoIcon sx={{ color: "black" }} /></button>
                                 </td>
 
                             </tr>
@@ -200,6 +252,55 @@ const Products = () => {
                     </tbody>
                 </Table>
             </div>
+            {byIdModal && (
+                <div className='byIdModal'>
+                    <p>Brand: {byId?.data?.brand}</p><br />
+                    <p>Color: {byId?.data?.color}</p><br />
+                    <p>Product Name: {byId?.data?.productName}</p><br />
+                    <p>Description: {byId?.data?.description}</p><br />
+                    <p>Price: {byId?.data?.price}</p><br />
+                    <p>Discount: {byId?.data?.discountPrice}</p><br />
+                    <p>Quantity: {byId?.data?.quantity}</p>
+                    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                        {byId?.data?.images?.length > 0 ? (
+                            byId.data.images.map((img) => (
+                                <div key={img.id} style={{ position: "relative" }}>
+                                    <img
+                                        src={`${baseApi}/images/${img.images}`}
+                                        alt=""
+                                        style={{ width: "50px", height: "50px", borderRadius: "5px" }}
+                                    />
+                                    <button
+                                        onClick={() => deleteProductIMage(img.id)}
+                                        className='btnDeleteProduct'
+                                        style={{
+                                            position: "absolute",
+                                            top: "-5px",
+                                            right: "-5px",
+                                            background: "red",
+                                            border: "none",
+                                            borderRadius: "50%",
+                                            color: "white",
+                                            cursor: "pointer",
+                                            width: "20px",
+                                            height: "20px",
+                                            fontSize: "12px",
+                                            padding: 0,
+                                        }}
+                                    >
+                                        x
+                                    </button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No images available</p>
+                        )}
+                    </div>
+                    <input onClick={()=> addImageProduct()} type="file"/>
+
+                    <button onClick={() => setByIdModal(false)}>Close</button>
+                </div>
+            )}
         </>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navbar'
 import { useDispatch, useSelector } from 'react-redux'
-import { addProduct, getBrands, getCategory, getColor, getProduct, getSubCategory } from '../features/api';
+import { addProduct, getBrands, getByIdProductAsync, getCategory, getColor, getProduct, getSubCategory } from '../features/api';
 import { baseApi } from '../app/token';
 import logoImage from '../assets/Group 1116606595 (3).png'
 
@@ -29,15 +29,30 @@ import MuiBox2 from '../assets/div.MuiBox-root (4).png'
 import MuiBoxIcon from '../assets/iconly-glass-discount.svg fill.png'
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
+import { message, Space } from 'antd';
 
 
 const onSearch = (value, _e, info) => console.log(info?.source, value);
-const EditProducts = () => {
+const EditProduct = () => {
     const dispatch = useDispatch();
     const [age, setAge] = React.useState('');
     const navigate = useNavigate();
     const [subCategories, setSubCategories] = useState([]);
     const [selectedSubCategory, setSelectedSubCategory] = useState("");
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const successAdd = () => {
+        messageApi.open({
+            type: 'success',
+            content: 'Продуст успешно создан',
+        });
+    };
+
+    const { byId } = useSelector((state) => state.byIdProduct);
+
+    useEffect(() => {
+        dispatch(getByIdProductAsync());
+    })
 
     const [productData, setProductData] = React.useState({
         ProductName: "",
@@ -51,9 +66,6 @@ const EditProducts = () => {
         Code: "",
     });
     const [images, setImages] = React.useState(null);
-
-
-
 
     const { data } = useSelector((state) => state.items);
     const { colors } = useSelector((state) => state.colors)
@@ -129,6 +141,7 @@ const EditProducts = () => {
 
         dispatch(addProduct(formData))
         navigate("/products")
+        successAdd();
 
     };
     const [idSubCategory, setIdSubCategory] = useState(null);
@@ -142,6 +155,7 @@ const EditProducts = () => {
 
     return (
         <>
+            {contextHolder}
             <div className='navbar'>
                 <div className='navbarLogo'>
                     <img src={logoImage} alt="" />
@@ -195,7 +209,7 @@ const EditProducts = () => {
             </div>
             <div className='textProducts'>
                 <div className='h2TextProductsAddNew'>
-                    <h2 className=''>Products</h2>
+                    <h2 className=''>Products Edit</h2>
 
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
@@ -208,7 +222,7 @@ const EditProducts = () => {
                 <InputAntd
                     className='sumInputnameProduct'
                     placeholder='Name Product'
-                    value={productData.ProductName}
+                    value={byId.ProductName}
                     onChange={(e) => setProductData({ ...productData, ProductName: e.target.value })}
                 /> <br /><br />
                 <input
@@ -328,4 +342,4 @@ const EditProducts = () => {
     )
 }
 
-export default EditProducts
+export default EditProduct

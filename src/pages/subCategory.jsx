@@ -162,7 +162,7 @@ const SubCategory = () => {
             </div>
 
             <div className='categoryDiv'>
-               
+
 
                 <div className='TableSubCategoryTable'>
                     <Table>
